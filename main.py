@@ -1,8 +1,8 @@
 from funciones import *
 from funciones_sql import *
 import mysql.connector
-
-
+#Laura ALarcon Abril C.C. 1058351369
+#Juan Andres Sañudo C.C.1001234045
 
 menu_principal= ("""
             1.medicamentos
@@ -43,52 +43,44 @@ while True:
         if ingreso == False :
             ingreso = validar_usuario()
         print(menu_principal)
-        x = int(input("Seleccione la opción del menú que desea utilizar: "))
-        if x == 1:
+        x = input("Seleccione la opción del menú que desea utilizar:\n")
+        if x == '1':
             mostrarmenu = True
             while mostrarmenu:
                 print(menu_medicamentos)
-                y = int(input("Ingrese el menú de mecicamento que desea utilizar: "))
-                if y == 1:
+                y = input("Ingrese el menú de mecicamento que desea utilizar:\n")
+                if y == '1':
                     ingresar_medicamento()
-                elif y == 2:
-                    menu_actualizacion=input('Seleccione el dato que desea actualizar:1.Lote\n2.Distribuidor\n3.Cantidad\n4.Fecha\n5.Precio\n6.Salir\n')
-                    if menu_actualizacion=='1':
-                        if buscar_lote():
-                            sql='UPDATE medicamentos SET nombre=%s WHERE lote=%s'
-                            nombre_med=nombre()
-                            val=(nombre_med,lote())
-                            cursor.execute(sql,val)
-                            cnx.commit()
-
-                elif y == 3:
-                    buscar_medicamento=buscar_lote()
-                elif y == 4:
+                elif y == '2':
+                    actualizar_medicamento()
+                elif y == '3':
+                    buscar_medicamento()
+                elif y == '4':
                     ver_medicamentos()
-                elif y == 5:
-                    ji = 0
-                elif y == 6:
+                elif y == '5':
+                    eliminar_medicamento()
+                elif y == '6':
                     mostrarmenu = False
                     break
                 else:
                     print("ERROR! el menu no esta disponible, ingrese otro")
                     continue
-        elif x == 2:
+        elif x == '2':
             mostrarmenu2 = True
             while mostrarmenu2:
                 print(menu_provedor)
-                z = input("ingrese el menu de provedores que desea utilizar: ")
-                if z == 1:
+                z = input("Ingrese el menú de provedores que desea utilizar:\n")
+                if z == '1':
                     ingresar_provedor()
-                elif z == 2:
-                    menu_actualizacion=input('Seleccione el dato que desea actualizar:1.Código\n2.Distribuidor\n3.Cantidad\n4.Fecha\n5.Precio\n6.Salir\n')
-                elif z == 3:  
-                    ji = 0
-                elif z == 4:
+                elif z == '2':
+                    actualizar_provedor()
+                elif z == '3':  
+                    buscar_provedor()
+                elif z == '4':
                     ver_provedores()
-                elif z == 5:
-                    ji = 0
-                elif z == 6:
+                elif z == '5':
+                    eliminar_provedor()
+                elif z == '6':
                     mostrarmenu2 = False
                     break
                 else:
@@ -98,19 +90,24 @@ while True:
             mostrarmenu3 = True
             while mostrarmenu3 :
                 print(menu_ubicacion)
-                w = input("ingrese el menu de ubicacion que desea utilizar: ")
-                if w == 1:
+                w = input("Ingrese el menu de ubicacion que desea utilizar:\n")
+                if w == '1':
                     ingresar_ubicacion()
-                elif w == 4:
+                elif w=='2':
+                    actualizar_ubicacion()
+                elif z == '3':  
+                    buscar_ubicacion()
+                elif z == '4':
                     ver_ubicaciones()
-
-                elif w == 6:
+                elif z == '5':
+                    eliminar_ubicacion()
+                elif w == '6':
                     mostrarmenu3 = False
                     break
                 else:
                     print("ERROR! el menu no esta disponible, ingrese otro")
                     continue
-        elif x == 4:
+        elif x == '4':
             break 
         else:
             print("ERROR! el menu no esta disponible, ingrese otro")
