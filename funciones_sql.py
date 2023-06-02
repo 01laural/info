@@ -1,19 +1,29 @@
 from funciones import *
+import mysql.connector
+
 def validar_usuario():
+    conexion = mysql.connector.connect(
+         host="localhost",  # El host de tu base de datos
+         user="informatica1",    # El nombre de usuario de la base de datos
+         password="bio123",  # La contraseña de la base de datos
+         database="informatica1"  # El nombre de la base de datos
+     )
     usuario = input("Ingrese su nombre de usuario: ")
     contraseña = input("Ingrese su contraseña: ")
     cursor = conexion.cursor()
-    consulta = "SELECT * FROM usuarios WHERE usuario = %s AND contraseña = %s"
+    consulta = "SELECT * FROM usuarios WHERE Usuarios = %s AND Password = %s"
     parametros = (usuario, contraseña)
     cursor.execute(consulta, parametros)
     resultado = cursor.fetchone()
     if resultado:
         print("Inicio de sesión exitoso.")
+        cursor.close()
+        conexion.close()
+        return True
         # Aquí puedes continuar con el resto de tu código
     else:
         print("Usuario o contraseña incorrectos. Intente nuevamente.")
         validar_usuario()
-validar_usuario()
 
 def ingresar_medicamento():
    medicamento_insert="""INSERT INTO medicamentos(
@@ -73,10 +83,19 @@ def buscar_medicamento():
    cursor.execute(sql,lote())
 
 def ver_medicamentos():
+   conexion = mysql.connector.connect(
+         host="localhost",  # El host de tu base de datos
+         user="informatica1",    # El nombre de usuario de la base de datos
+         password="bio123",  # La contraseña de la base de datos
+         database="informatica1"  # El nombre de la base de datos
+    )
+   cursor = conexion.cursor()
    sql = "SELECT * FROM medicamentos"
    cursor.execute(sql)
-   results = cursor.fetchall()
-   results
+   results = cursor.fetc6hall()
+   print(results)
+   cursor.close()
+   conexion.close()
 
 def ver_provedores():
    sql = "SELECT * FROM provedores"
@@ -140,3 +159,5 @@ def actualizar_medicamento():
             continue
    else:
       print("No se encontró ningún medicamento con ese número de lote.")
+
+
